@@ -1,0 +1,27 @@
+command /tpa [<player>]:
+    trigger:
+        if arg 1 is set:
+            if {mrherotpa.Players::%player%} is set:
+                set {mrherotpa.Players::%player%} to arg 1
+                set {mrherotpa.Players::%arg 1%} to player
+                send "&aTPA enviado!"
+                send "&a%player% te mandou TPA!" to arg 1
+                wait 20 seconds
+                clear {mrherotpa.Players::%arg 1%}
+                clear {mrherotpa.Players::%player%}
+                send "&cTPA expirou..."
+            else:
+                send "&cVocê já enviou um TPA!"
+        else:
+            send "&c/tpa player"
+        
+command /aceitar:
+    trigger:
+        if {mrherotpa.Players::%player%} is set:
+            teleport player to {mrherotpa.Players::%player%}
+            send "&aVocê aceitou o TPA!"
+            send "&a%player% aceitou seu TPA!" to {mrherotpa.Players::%player%}
+            clear {mrherotpa.Players::%arg 1%}
+            clear {mrherotpa.Players::%player%}
+        else:
+            send "&cNenhum TPA disponível!"
